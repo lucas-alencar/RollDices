@@ -9,7 +9,7 @@ Para compilar esse projeto é necessário utilizar-se de uma ide que compile Mav
 ```console
 mvn compile
 ```
-## Para compilar com o maven pelo terminal
+## Para compilar com o maven pela IDE
 Basta adicionar o projeto à sua IDE e compilar conforme as especificações da mesma. Para criar esse projeto foi utilizado o Eclipse IDE 2022-09.
 
 ## Para executar
