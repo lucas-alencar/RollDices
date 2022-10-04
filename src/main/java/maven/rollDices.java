@@ -7,7 +7,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class rollDices {
-	public void roll() throws IOException {
+	
+	private Response response;
+	
+	public rollDices(){
+		this.response = null;
+	}
+	
+	private boolean request() throws IOException {
 		OkHttpClient client = new OkHttpClient();
 
 		Request request = new Request.Builder()
@@ -16,8 +23,25 @@ public class rollDices {
 			.addHeader("X-RapidAPI-Key", "3517a6f0afmshdf368e62e182f28p1803f1jsnb7b1349ebe06")
 			.addHeader("X-RapidAPI-Host", "roll-dice1.p.rapidapi.com")
 			.build();
-
-		Response response = client.newCall(request).execute();
-		System.out.println(response.body().string());
+		
+		try {
+			this.response = client.newCall(request).execute();
+			return true;
+		}catch(IOException exception){
+			exception.printStackTrace();
+		}
+		
+		this.response = null;
+		return false;
 	}
+	
+	public void roll() throws Exception {
+		if(this.request()) {
+			System.out.println(this.response.body().string());
+		}
+		else {
+			throw new Exception("Request failed");
+		}
+	}
+
 }
