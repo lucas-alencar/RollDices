@@ -10,6 +10,7 @@ public class RollDices {
 	
 	private Response response;
 	private final OkHttpClient client = new OkHttpClient();
+	private final String errorResponse = "Failed Request";
 	
 	public RollDices(){
 		this.response = null;
@@ -35,13 +36,18 @@ public class RollDices {
 		return false;
 	}
 	
-	public void roll() throws Exception {
-		if(this.request()) {
-			System.out.println(this.response.body().string());
+	public String roll() throws Exception {
+		try {
+			
+			if(this.request()) {
+				System.out.println(this.response.body().string());
+				return this.response.body().string();
+			}
+			throw new Exception("Request Failed");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
-		else {
-			throw new Exception("Request failed");
-		}
+		return this.errorResponse;
 	}
 
 }
